@@ -1,0 +1,46 @@
+#baseLayout {
+  min-height: 100vh;
+  .top-header {
+    z-index: 1;
+    width: 100%;
+    margin-bottom: 20px;
+    .topMenu{
+      line-height: 64px;
+    }
+  }
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+    &:hover {
+      color: #1890ff;
+    }
+  }
+  .logo {
+    height: 32px;
+    background: grey;
+    margin: 16px;
+  }
+  .top-logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+  }
+  .content {
+    margin: 0 16px 24px;
+    padding: 24px;
+    background: #fff;
+    min-height: 280px
+  }
+  .navTabs {
+    padding-left: 16px;
+    .ant-tabs-bar {
+      margin-bottom: 0;
+    }
+  }
+}
+

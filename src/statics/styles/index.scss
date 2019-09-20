@@ -1,0 +1,10 @@
+#wrapper{
+  min-width: 1300px;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+.content{
+  flex: 1;
+}
