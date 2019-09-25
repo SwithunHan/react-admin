@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import Routers from './routers/index';
 import {Provider} from "mobx-react";
 import loginStore from "stores/loginStore"
+import routeStore from "stores/routeStore"
+import permissionStore from "stores/permissionStore"
 
-const stores = {loginStore}
+const stores = {loginStore, routeStore, permissionStore};
 
 ReactDOM.render(
     <Provider {...stores}>

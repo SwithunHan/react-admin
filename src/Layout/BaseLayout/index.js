@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {Layout, Icon} from 'antd';
 import {renderRoutes} from "react-router-config";
+import {inject, observer} from "mobx-react"
 import "./style.scss"
 import defaultSetting from "../../config/defaultSetting"
 import SideMenu from "./SideMenu";
@@ -29,7 +30,9 @@ function searchRouteName(route, path) {
     return {name, father}
 }
 
-export default class BaseLayout extends Component {
+@inject("routeStore")
+@observer
+class BaseLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -74,7 +77,7 @@ export default class BaseLayout extends Component {
                                     </Header>
                             }
                             {
-                                this.state.showTabs ? <TabsCard/> : ""
+                                this.state.showTabs ? <Route render={(props) => <TabsCard {...props}/>}/> : ""
                             }
                             <Content className="content">
                                 {renderRoutes(this.props.route.routes)}
@@ -86,3 +89,5 @@ export default class BaseLayout extends Component {
         );
     }
 }
+
+export default BaseLayout

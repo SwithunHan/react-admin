@@ -4,9 +4,13 @@ import PropTypes from "prop-types"
 import {appRoute} from "../../../routers/routerConfig"
 import {renderMenu, searchRouteName} from "../renderMenu"
 import "./style.scss"
+import permission from "../../../utils/permission";
+import {inject, observer} from "mobx-react";
 
 const {Sider} = Layout;
-
+@inject("routeStore")
+@inject("permissionStore")
+@observer
 class SideMenu extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +28,8 @@ class SideMenu extends Component {
                     theme="dark"
                 >
                     {
-                        renderMenu(appRoute.routes)
+                        renderMenu(permission(this.props.permissionStore.permission))
+
                     }
                 </Menu>
             </Sider>

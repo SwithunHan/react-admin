@@ -28,26 +28,44 @@ export function searchRouteName(route, path) {
     let name = "";
     let father = "";
     route.forEach(menu => {
-        if (menu.hasOwnProperty("routes")) {
-            if (name === "") {
-                father = menu.name;
-                name = searchRouteName(menu.routes, path)['name']
-            }
+        if (menu.hasOwnProperty("routes") && name === "") {
+            father = menu.name;
+            name = searchRouteName(menu.routes, path)['name'];
         } else {
             if (menu.path === path) {
-                name = menu.name
+                name = menu.name;
             }
         }
     });
     return {name, father}
 }
 
-export function renderTabs(route) {
+
+export function searchRouteInfo(route, name) {
+    let result = "";
+    route.forEach(menu => {
+        if (menu.hasOwnProperty("routes") && result === "") {
+            result = searchRouteInfo(menu.routes, name);
+        } else {
+            if (menu.name === name) {
+                result = menu;
+            }
+        }
+    });
+    return result
+}
+
+export function setTabs(route) {
     let renderTabs = sessionStorage.getItem("renderTabs");
+    let temp = null;
     if (renderTabs) {
-        renderTabs = JSON.stringify(JSON.parse(renderTabs).push(route))
+        temp = JSON.parse(renderTabs);
+        temp.push(route);
+        temp = [...new Set(temp)];
+        renderTabs = JSON.stringify(temp)
     } else {
         renderTabs = JSON.stringify([route])
     }
-    sessionStorage.setItem("renderTabs", renderTabs)
+    sessionStorage.setItem("renderTabs", renderTabs);
+    return JSON.parse(renderTabs)
 }

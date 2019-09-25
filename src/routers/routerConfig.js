@@ -1,5 +1,6 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
+import deepcopy from 'deepcopy';
 import BaseLayout from "../Layout/BaseLayout";
 import UserLayout from "../Layout/UserLayout";
 import Login from "../views/User/Login"
@@ -10,19 +11,20 @@ import Nested from "../views/App/Nested"
 import Menu1 from "../views/App/Nested/Menu1";
 import Menu2 from "../views/App/Nested/Menu2";
 
-const deepcopy = require('deepcopy');
+
 const NotFound = () => <div>404</div>;
 
 function requireAuth(Layout, props, token) {
+    const prop = {...props};
+    delete prop.staticContext;
     if (token === "") { // 未登录
         return <Redirect to="/user/login"/>;
-
     } else {
-        return <Layout {...props} />
+        return <Layout {...prop} />
     }
 }
 
-function formatRoute(routes) {
+export function formatRoute(routes) {
     let route = deepcopy(routes);
     if (route.routes) {
         let path = route.routes[0].path;
@@ -55,14 +57,16 @@ export const appRoute = {
             component: Table,
             name: "table",
             title: "表格",
-            icon: "table"
+            icon: "table",
+            permission: true
         },
         {
             path: '/app/form',
             component: Form,
             name: "form",
             title: "表单",
-            icon: "form"
+            icon: "form",
+            permission: true
         },
         {
             path: '/app/nested',
@@ -86,7 +90,8 @@ export const appRoute = {
                     icon: "bars"
                 },
 
-            ]
+            ],
+            permission: true
         },
         {
             path: '/app/nested1',
@@ -110,7 +115,8 @@ export const appRoute = {
                     icon: "bars"
                 },
 
-            ]
+            ],
+            permission: true
         },
     ]
 };
