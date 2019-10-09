@@ -13,3 +13,11 @@ export default function permission(permission) {
     });
     return result
 }
+
+export function getPermission() {
+    return sessionStorage.getItem("permission")
+}
+
+export function setPermission(val) {
+    return sessionStorage.setItem("permission", val)
+}

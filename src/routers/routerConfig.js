@@ -141,10 +141,10 @@ const userRoute = {
 export const routerConfig = [
     {
         path: '/',
-        component: () => <Redirect to="/app"/>,
+        component: () => <Redirect to="/user/login"/>,
         exact: true
     },
-    formatRoute(appRoute),
+    // formatRoute(appRoute),
     formatRoute(userRoute),
     {
         path: "/404",
